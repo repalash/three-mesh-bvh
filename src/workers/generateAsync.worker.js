@@ -4,15 +4,15 @@ import {
 } from 'three';
 import { MeshBVH } from '../core/MeshBVH.js';
 
-global.onmessage = function ( { data } ) {
+globalThis.onmessage = function ( { data } ) {
 
-	let prevTime = global.performance.now();
+	let prevTime = globalThis.performance.now();
 	function onProgressCallback( progress ) {
 
-		const currTime = global.performance.now();
+		const currTime = globalThis.performance.now();
 		if ( currTime - prevTime >= 10 || progress === 1.0 ) {
 
-			global.postMessage( {
+			globalThis.postMessage( {
 
 				error: null,
 				serialized: null,
@@ -58,7 +58,7 @@ global.onmessage = function ( { data } ) {
 		const bvh = new MeshBVH( geometry, options );
 		const serialized = MeshBVH.serialize( bvh, { copyIndexBuffer: false } );
 
-		global.postMessage( {
+		globalThis.postMessage( {
 
 			error: null,
 			serialized,
@@ -69,7 +69,7 @@ global.onmessage = function ( { data } ) {
 
 	} catch ( error ) {
 
-		global.postMessage( {
+		globalThis.postMessage( {
 
 			error,
 			serialized: null,
